@@ -1,4 +1,4 @@
-# Verification Bot via Telegram
+# Discord-Telegram Verification Bot 🔐
 
 A Discord-Telegram verification bot that provides secure server access through a two-step verification process. Users receive a verification code through Telegram and verify themselves in Discord to gain access to the server.
 
