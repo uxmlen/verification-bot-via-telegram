@@ -31,7 +31,7 @@ class Verification(commands.Cog):
         logging.info("Verification bot started")
 
     def setup_telegram(self):
-        "Setup and start Telegram bot"""
+        """Setup and start Telegram bot"""
         self.tg_bot = Application.builder().token(os.getenv("TELEGRAM_BOT_TOKEN")).build()
         
         self.tg_bot.add_handler(CommandHandler("verify", self.telegram_verify))
