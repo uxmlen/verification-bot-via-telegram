@@ -25,15 +25,21 @@ class Bot(commands.Bot):
         logging.info("Bot initialization started")
 
     async def on_ready(self):
-        """Log bot startup information"""
         logging.info(f"Bot is ready and logged in as {self.user}")
         logging.info("=== Configuration ===")
         logging.info(f"Discord Bot ID: {self.user.id}")
         logging.info(f"Role ID: {os.getenv('ROLE')}")
         logging.info(f"Channel ID: {os.getenv('CHANNEL')}")
 
+        activity_name = ".verify"
+        await self.change_presence(
+            activity=discord.Activity(
+                type=discord.ActivityType.listening, name=activity_name,
+            )
+        )
+
     async def setup_hook(self):
-        """Load all cogs and log the process"""
+        """Load all cogs"""
         logging.info("Starting to load cogs...")
         cog_path = Path("./cogs")
 
@@ -42,7 +48,7 @@ class Bot(commands.Bot):
                 await self.load_extension(f"cogs.{file.stem}")
                 logging.info(f"Successfully loaded cog: {file.stem}")
             except Exception as e:
-                logging.error(f"Failed to load cog {file.stem}: {str(e)}")
+                logging.error(f"Failed to load cog {file.stem}: {e}")
 
         logging.info("Finished loading cogs")
 
